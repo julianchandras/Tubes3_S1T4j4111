@@ -34,17 +34,15 @@ namespace Biometric
             string database = Env.GetString("DB_DATABASE");
 
             string connectionString = $"Server={server};User={user};Password={password};Database={database};";
+            MessageBox.Show(connectionString);
 
             // Execute the query using Dapper
             using (var connection = new MySqlConnection(connectionString))
             {
-                // Step 1: Create an instance of PersonRepository
                 PersonRepository pr = new PersonRepository(connectionString);
 
-                // Step 2: Create a new Person object with the required details
-                Person test = new Person
+                Person test = new Person("13522080")
                 {
-                    NIK = "13522080",  // Assuming this is the NIK
                     Nama = "John Doe",
                     TempatLahir = "Jakarta",
                     TanggalLahir = new DateTime(1990, 1, 1), // Example date of birth
@@ -56,14 +54,14 @@ namespace Biometric
                     Pekerjaan = "Developer",
                     Kewarganegaraan = "Indonesia",
                 };
+
                 MessageBox.Show(test.ToString());
 
-                // Step 3: Call InsertPersonAsync method to insert the new person
                 int rowsAffected = await pr.InsertPersonAsync(test);
 
                 MessageBox.Show(rowsAffected.ToString());
                 IEnumerable<Person> allPersons = await pr.GetAllPersonsAsync();
-
+                    
                 // Convert rowsAffected to string before showing it in MessageBox
                 MessageBox.Show(((allPersons.First()).NIK).ToString());
             }

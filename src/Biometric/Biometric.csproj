@@ -12,6 +12,7 @@
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="DotNetEnv" Version="3.0.0" />
     <PackageReference Include="MySqlConnector" Version="2.3.7" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
   </ItemGroup>
 
 </Project>

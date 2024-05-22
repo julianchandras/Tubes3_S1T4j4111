@@ -8,7 +8,7 @@ namespace Biometric.Models
 {
     class Person
     {
-        public string? NIK { get; set; }
+        public string NIK { get; set; }
         public string? Nama { get; set; }
         public string? TempatLahir { get; set; }
         public DateTime? TanggalLahir { get; set; }  // Nullable DateTime for nullable 'tanggal_lahir' field
@@ -20,9 +20,9 @@ namespace Biometric.Models
         public string? Pekerjaan { get; set; }
         public string? Kewarganegaraan { get; set; }
 
-/*        public Person(string nik)
+        public Person(string nik)
         {
             NIK = nik ?? throw new ArgumentNullException(nameof(nik));
-        }*/
+        }
     }
 }

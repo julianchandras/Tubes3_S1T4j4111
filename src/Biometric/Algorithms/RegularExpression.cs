@@ -70,13 +70,13 @@ namespace Biometric.Algorithms
         }
     }
 
-    class Program
-    {
-        public static void Main(string[] args)
-        {
-            // Instantiate RegularExpression and print the result
-            RegularExpression re = new("ayam");
-            Console.WriteLine(re.GetRegexText());
-        }
-    }
+//    class Program
+//    {
+//        public static void Main(string[] args)
+//        {
+//            // Instantiate RegularExpression and print the result
+//            RegularExpression re = new("ayam");
+//            Console.WriteLine(re.GetRegexText());
+//        }
+//    }
 }

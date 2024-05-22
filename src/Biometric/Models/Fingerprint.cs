@@ -8,5 +8,13 @@ namespace Biometric.Models
 {
     class Fingerprint
     {
+        public string citra { get; set; }
+        public string nama { get; set; }
+
+        public Fingerprint(string nama, string citra)
+        {
+            this.nama = nama;
+            this.citra = citra;
+        }
     }
 }

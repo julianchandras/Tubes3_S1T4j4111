@@ -44,9 +44,4 @@ public class BM
             last[pattern[i]] = i;
         return last;
     }
-
-    public static void Main(string[] args)
-    {
-        Console.WriteLine(bmMatch("ababcabcacbab", "abcac"));
-    }
 }

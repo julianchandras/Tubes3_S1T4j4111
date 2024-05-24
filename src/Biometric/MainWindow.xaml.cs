@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System;
+using System.Text;
 using System.Windows;
 using Dapper;
 using DotNetEnv;
@@ -16,54 +18,25 @@ namespace Biometric
         public MainWindow()
         {
             InitializeComponent();
-
-            // Mark the constructor as async and change its return type to Task
-            _ = InitializeAsync();
         }
 
-        // Use an asynchronous method to perform initialization
-        private async Task InitializeAsync()
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Directory.GetCurrentDirectory());
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
 
-            Env.Load("..\\..\\.env");
-
-            string server = Env.GetString("DB_SERVER");
-            string user = Env.GetString("DB_USER");
-            string password = Env.GetString("DB_PASS");
-            string database = Env.GetString("DB_DATABASE");
-
-            string connectionString = $"Server={server};User={user};Password={password};Database={database};";
-            MessageBox.Show(connectionString);
-
-            // Execute the query using Dapper
-            using (var connection = new MySqlConnection(connectionString))
+            if (openFileDialog.ShowDialog() == true)
             {
-                PersonRepository pr = new PersonRepository(connectionString);
-
-                Person test = new Person("13522080")
+                try
                 {
-                    Nama = "John Doe",
-                    TempatLahir = "Jakarta",
-                    TanggalLahir = new DateTime(1990, 1, 1), // Example date of birth
-                    JenisKelamin = "Laki-Laki",
-                    GolonganDarah = "O",
-                    Alamat = "Jl. Sudirman No. 10",
-                    Agama = "Islam",
-                    StatusPerkawinan = "Belum Menikah",
-                    Pekerjaan = "Developer",
-                    Kewarganegaraan = "Indonesia",
-                };
-
-                MessageBox.Show(test.ToString());
-
-                int rowsAffected = await pr.InsertPersonAsync(test);
-
-                MessageBox.Show(rowsAffected.ToString());
-                IEnumerable<Person> allPersons = await pr.GetAllPersonsAsync();
-                    
-                // Convert rowsAffected to string before showing it in MessageBox
-                MessageBox.Show(((allPersons.First()).NIK).ToString());
+                    // Load the selected image file into the image control
+                    BitmapImage bitmapImage = new BitmapImage(new Uri(openFileDialog.FileName));
+                    imageControl.Source = bitmapImage;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image: " + ex.Message);
+                }
             }
         }
     }

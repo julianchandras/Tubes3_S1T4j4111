@@ -6,7 +6,100 @@
         xmlns:local="clr-namespace:Biometric"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FFF8F9D7">
+        <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cooper Black" Height="82" Padding="20" Background="#FFACD793">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFFA62F"/>
+                    <GradientStop Color="#FFFFC96F" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+        
+        <Button x:Name="image_button" Content="Pilih Citra" HorizontalAlignment="Left" Margin="147,126,0,0" VerticalAlignment="Top" Height="36" Width="114" FontFamily="Adobe Caslon Pro" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="#FFA62F" FontSize="15" Click="ImageButton_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#FFA62F" 
+                BorderBrush="#ACD793" 
+                BorderThickness="1" 
+                CornerRadius="18">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FontWeight" Value="ExtraBold"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,131,0,0">
+            <RadioButton x:Name="radioButton1" VerticalContentAlignment="Center" GroupName="Options" IsChecked="True" Tag="BM">
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border1" Background="#FFA62F" BorderBrush="#ACD793" BorderThickness="1" CornerRadius="15,0,0,15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border1" Property="Background" Value="#ACD793"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </RadioButton.Template>
+                <TextBlock Text="BM" Foreground="White" FontFamily="Adobe Caslon Pro" FontSize="14" FontWeight="Bold"/>
+            </RadioButton>
+            <RadioButton x:Name="radioButton2" VerticalContentAlignment="Center" GroupName="Options" Tag="KMP">
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border2" Background="#FFA62F" BorderBrush="#ACD793" BorderThickness="1" CornerRadius="0,15,15,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border2" Property="Background" Value="#ACD793"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </RadioButton.Template>
+                <TextBlock Text="KMP" Foreground="White" FontFamily="Adobe Caslon Pro" FontSize="14" FontWeight="Bold"/>
+            </RadioButton>
+        </StackPanel>
+        
+        <Button x:Name="start" Content="CARI" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="114" FontFamily="Adobe Caslon Pro" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="#FFA62F" FontSize="15" Margin="538,126,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#FFA62F" 
+                BorderBrush="#ACD793" 
+                BorderThickness="1" 
+                CornerRadius="18">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FontWeight" Value="ExtraBold"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Border BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left" Height="192" Margin="128,185,0,0" Background="#FFFF4444" CornerRadius="15" VerticalAlignment="Top" Width="152">
+            <Image x:Name="imageControl" Stretch="Uniform" Margin="10"/>
+        </Border>
 
     </Grid>
 </Window>

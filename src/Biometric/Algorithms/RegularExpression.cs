@@ -73,7 +73,7 @@ namespace Biometric.Algorithms
             return retVal;
         }
 
-        public static void Main(string[] args) {
+    /*    public static void Main(string[] args) {
             List<string> tester = new List<string>();
             tester.Add("Ayam Goren6");
             tester.Add("4yam GoR3ng");
@@ -90,6 +90,6 @@ namespace Biometric.Algorithms
             foreach (string a in hasil) {
                 Console.WriteLine(a);
             }
-        }
+        }*/
     }
 }

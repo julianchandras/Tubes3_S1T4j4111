@@ -17,30 +17,36 @@ namespace Biometric
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+        private BitmapImage sidikJari = new BitmapImage();
+    private string algorithm = "BM";
+
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void ImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+    private void ImageButton_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
 
-            if (openFileDialog.ShowDialog() == true)
+        if (openFileDialog.ShowDialog() == true)
+        {
+            try
             {
-                try
-                {
-                    // Load the selected image file into the image control
-                    BitmapImage bitmapImage = new BitmapImage(new Uri(openFileDialog.FileName));
-                    imageControl.Source = bitmapImage;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error loading image: " + ex.Message);
-                }
+                sidikJari = new BitmapImage(new Uri(openFileDialog.FileName));
+                imageControl.Source = sidikJari;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading image: " + ex.Message);
             }
         }
+    }
+
+    private void start_Click(object sender, RoutedEventArgs e)
+    {
+        if (radioButton2.IsChecked == true) {algorithm = "KMP";}
+        MessageBox.Show("Algorithm: " + algorithm);
     }
 }

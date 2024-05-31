@@ -21,14 +21,14 @@ namespace Biometric
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window {
         private BitmapImage sidikJari = new BitmapImage();
-    private string algorithm = "BM";
+        private string algorithm = "BM";
 
-    public MainWindow()
-    {
-        InitializeComponent();
-    }
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
         // Use an asynchronous method to perform initialization
         private async Task InitializeAsync()
@@ -102,6 +102,11 @@ namespace Biometric
             }
         }
 
-
+        private void start_Click (object sender, RoutedEventArgs e)
+        {
+            // Initialize the application
+            if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
+            MessageBox.Show(algorithm);
+        }
     }
 }

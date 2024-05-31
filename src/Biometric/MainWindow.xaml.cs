@@ -22,13 +22,13 @@ namespace Biometric
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
+        private BitmapImage sidikJari = new BitmapImage();
+    private string algorithm = "BM";
 
-            _ = InitializeAsync();
-        }
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
 
         // Use an asynchronous method to perform initialization
         private async Task InitializeAsync()

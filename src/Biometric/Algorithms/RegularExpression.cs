@@ -47,7 +47,7 @@ namespace Biometric.Algorithms
 
         public RegularExpression(string text) {
             text = text.ToUpper();
-            regexText = @"^";
+            regexText = "^";
             foreach (char charater in text)
             {
                 if (charater != ' ') {
@@ -56,7 +56,7 @@ namespace Biometric.Algorithms
                     regexText += @"\s";
                 }
             }
-            regexText += @"$";
+            regexText += "$";
         }
 
         public string getRegexText() {

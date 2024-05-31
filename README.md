@@ -1,6 +1,12 @@
 # Tubes3_S1T4j4111
 
-Make sure to install Avalonia for VSCode and C# Dev Kit in Visual Studio Code
+PLEASE BUAT FILE .env YANG SETARA DENGAN DIRECTORY README INI BERADA SESUAI TEMPLATE
+```
+DB_SERVER=localhost
+DB_USER=<username>
+DB_PASS=<password>
+DB_DATABASE=tubes3_stima
+```
 
 To run the project do the following command
 ```

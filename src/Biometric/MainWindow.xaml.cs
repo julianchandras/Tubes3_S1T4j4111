@@ -78,6 +78,8 @@ namespace Biometric
                 // Convert rowsAffected to string before showing it in MessageBox
                 MessageBox.Show(((allPersons.First()).NIK).ToString());
             }
+
+
         }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -99,5 +101,7 @@ namespace Biometric
                 }
             }
         }
+
+
     }
 }

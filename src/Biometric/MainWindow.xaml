@@ -5,14 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Biometric"
         mc:Ignorable="d"
-        Title="MainWindow" Height="467" Width="800"
+        Title="MainWindow" Height="468" Width="800"
         ResizeMode="NoResize">
     <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800">
-        <Image Margin="524,-21,99,348">
-            <Image.Source>
-                <BitmapImage UriSource="/assets/Tomnook-Scary.png"/>
-            </Image.Source>
-        </Image>
         <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cascadia Code" Height="82" Padding="20" Background="#FF094044" Foreground="#E1D9CF" FontWeight="Bold">
         </TextBlock>
 
@@ -39,96 +34,97 @@
             </Button.Style>
         </Button>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,95,0,0">
-            <RadioButton x:Name="radioButton1" VerticalContentAlignment="Center" GroupName="Options" IsChecked="True" Tag="BM" Width="50" Height="25">
-                <RadioButton.Template>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="border1" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="8,0,0,8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="border1" Property="Background" Value="#124D54"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </RadioButton.Template>
-                <TextBlock Text="BM" FontFamily="Cascadia Code" FontSize="14">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
-                                    <Setter Property="FontWeight" Value="Normal"/>
-                                    <Setter Property="Foreground" Value="Black"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </RadioButton>
-            <RadioButton x:Name="radioButton2" VerticalContentAlignment="Center" GroupName="Options" Tag="KMP" Width="50" Height="25">
-                <RadioButton.Template>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="border2" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="0,8,8,0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="border2" Property="Background" Value="#124D54"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </RadioButton.Template>
-                <TextBlock Text="KMP" FontFamily="Cascadia Code" FontSize="14">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
-                                    <Setter Property="FontWeight" Value="Normal"/>
-                                    <Setter Property="Foreground" Value="Black"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </RadioButton>
-        </StackPanel>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,95,0,0">
+			<RadioButton x:Name="radioButton1" VerticalContentAlignment="Center" GroupName="Options" IsChecked="True" Tag="BM" Width="50" Height="25">
+				<RadioButton.Template>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Border x:Name="border1" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="8,0,0,8">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter TargetName="border1" Property="Background" Value="#124D54"/>
+								<Setter Property="BorderThickness" Value="0"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</RadioButton.Template>
+				<TextBlock Text="BM" FontFamily="Cascadia Code" FontSize="14">
+					<TextBlock.Style>
+						<Style TargetType="{x:Type TextBlock}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
+									<Setter Property="FontWeight" Value="Bold"/>
+									<Setter Property="Foreground" Value="White"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
+									<Setter Property="FontWeight" Value="Normal"/>
+									<Setter Property="Foreground" Value="Black"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
+									<Setter Property="FontWeight" Value="Bold"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</RadioButton>
+			<RadioButton x:Name="radioButton2" VerticalContentAlignment="Center" GroupName="Options" Tag="KMP" Width="50" Height="25">
+				<RadioButton.Template>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Border x:Name="border2" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="0,8,8,0">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter TargetName="border2" Property="Background" Value="#124D54"/>
+								<Setter Property="BorderThickness" Value="0"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</RadioButton.Template>
+				<TextBlock Text="KMP" FontFamily="Cascadia Code" FontSize="14">
+					<TextBlock.Style>
+						<Style TargetType="{x:Type TextBlock}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
+									<Setter Property="FontWeight" Value="Bold"/>
+									<Setter Property="Foreground" Value="White"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
+									<Setter Property="FontWeight" Value="Normal"/>
+									<Setter Property="Foreground" Value="Black"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
+									<Setter Property="FontWeight" Value="Bold"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</RadioButton>
+		</StackPanel>
+
+		<Button x:Name="start" Content="CARI" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="114" FontFamily="Cascadia Code" RenderTransformOrigin="0.5,0.5" FontSize="20" Margin="636,393,0,0" Click="start_Click" Foreground="White" FontWeight="Bold">
+			<Button.Template>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="buttonBorder" Background="#FF124D54"
+							BorderBrush="#102937"
+							BorderThickness="1"
+							CornerRadius="9">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="buttonBorder" Property="Background" Value="#094044"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Button.Template>
+		</Button>
 
 
-        <Button x:Name="start" Content="CARI" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="114" FontFamily="Cascadia Code" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="CadetBlue" FontSize="20" Margin="636,393,0,0" Click="start_Click" FontWeight="Bold">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="#FF124D54" 
-                BorderBrush="#102937" 
-                BorderThickness="1" 
-                CornerRadius="9">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="FontWeight" Value="Normal"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="FontWeight" Value="ExtraBold"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-
-        <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Left" Margin="50,132,0,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
+		<Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Left" Margin="50,132,0,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
             <Image x:Name="imageControl" Stretch="Uniform" Margin="10"/>
         </Border>
 
@@ -139,8 +135,8 @@
         <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Right" Margin="0,132,50,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
             <Image x:Name="biodata" Stretch="Uniform" Margin="10"/>
         </Border>
-        
-        <Image Margin="524,-21,99,348" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
-        <Image Margin="-12,332,687,0" Source="/assets/Tomnook-L.png" Stretch="Uniform"/>
-    </Grid>
+
+        <Image Margin="0,331,694,0" Source="assets/Tomnook.png" Stretch="Uniform"/>
+		<Image Margin="566,-3,86,347" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
+	</Grid>
 </Window>

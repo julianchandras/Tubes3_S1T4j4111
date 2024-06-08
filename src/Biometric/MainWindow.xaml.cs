@@ -1,20 +1,12 @@
-﻿using Biometric.Models;
+﻿using Biometric.Algorithms;
+using Biometric.Models;
 using Biometric.Repository;
 using DotNetEnv;
 using Microsoft.Win32;
 using MySqlConnector;
-using System;
 using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Biometric
 {
@@ -102,10 +94,33 @@ namespace Biometric
             }
         }
 
-        private void start_Click (object sender, RoutedEventArgs e)
+        private async void start_Click (object sender, RoutedEventArgs e)
         {
             // Initialize the application
             if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
+
+            RegularExpression r = new RegularExpression("Hartana Wacana");
+
+            Env.Load("..\\..\\.env");
+            
+            string server = Env.GetString("DB_SERVER");
+            string user = Env.GetString("DB_USER");
+            string password = Env.GetString("DB_PASS");
+            string database = Env.GetString("DB_DATABASE");
+
+            string connectionString = $"Server={server};User={user};Password={password};Database={database};";
+
+            List<string> names;
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                PersonRepository pr = new PersonRepository(connectionString);
+
+                IEnumerable<Person> allPersons = await pr.GetAllPersonsAsync();
+
+                names = allPersons.Select(person => person.Nama).ToList();
+            }
+
+            Console.WriteLine(r.compareAll(names)[0]);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

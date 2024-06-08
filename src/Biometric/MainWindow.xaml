@@ -8,11 +8,6 @@
         Title="MainWindow" Height="467" Width="800"
         ResizeMode="NoResize">
     <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800">
-        <Image Margin="524,-21,99,348">
-            <Image.Source>
-                <BitmapImage UriSource="/assets/Tomnook-Scary.png"/>
-            </Image.Source>
-        </Image>
         <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cascadia Code" Height="82" Padding="20" Background="#FF094044" Foreground="#E1D9CF" FontWeight="Bold">
         </TextBlock>
 
@@ -139,8 +134,7 @@
         <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Right" Margin="0,132,50,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
             <Image x:Name="biodata" Stretch="Uniform" Margin="10"/>
         </Border>
-        
+        <Image Margin="-12,325,687,7" Source="/assets/Tomnook-L.png" Stretch="Uniform"/>
         <Image Margin="524,-21,99,348" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
-        <Image Margin="-12,332,687,0" Source="/assets/Tomnook-L.png" Stretch="Uniform"/>
     </Grid>
 </Window>

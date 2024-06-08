@@ -8,11 +8,11 @@ namespace Biometric.Algorithms
 {
     class KMP
     {
-        public static int KMPSearch(string text, string pattern)
+        public static int KMPmatch(string text, string pattern)
         {
             int n = text.Length;
             int m = pattern.Length;
-            int[] b = ComputeBorder(pattern);
+            int[] b = computeBorder(pattern);
             int i = 0;
             int j = 0;
 
@@ -37,7 +37,7 @@ namespace Biometric.Algorithms
             return -1;
         }
 
-        public static int[] ComputeBorder(string pattern)
+        public static int[] computeBorder(string pattern)
         {
             int[] b = new int[pattern.Length];
             b[0] = 0;

@@ -85,7 +85,7 @@ namespace Biometric
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -106,7 +106,6 @@ namespace Biometric
         {
             // Initialize the application
             if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
-            MessageBox.Show(algorithm);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

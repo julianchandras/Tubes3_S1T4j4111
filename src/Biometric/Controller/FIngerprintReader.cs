@@ -212,7 +212,7 @@ namespace Biometric.Controller
             return sb.ToString();
         }
 
-        public static void Main(string[] args)
+        /*public static void Main(string[] args)
         {
             Console.WriteLine("starting converting from bmp to greyscale");
             string inputFilePath = @"C:\Users\Salsabiila\OneDrive - Institut Teknologi Bandung\Kuliah\Semester4\Stima\Tubes3\Tubes3_S1T4j4111\src\Biometric\Controller\9__M_Left_index_finger.BMP";
@@ -254,6 +254,6 @@ namespace Biometric.Controller
             {
                 Console.WriteLine(line);
             }
-        }
+        }*/
     }
 }

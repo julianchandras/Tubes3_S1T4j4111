@@ -108,5 +108,10 @@ namespace Biometric
             if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
             MessageBox.Show(algorithm);
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -6,23 +6,17 @@
         xmlns:local="clr-namespace:Biometric"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#747264" HorizontalAlignment="Left" Width="800">
-        <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cooper Black" Height="82" Padding="20" Background="#3C3633">
-            <TextBlock.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#E0CCBE"/>
-
-                </LinearGradientBrush>
-            </TextBlock.Foreground>
+    <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800">
+        <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cooper Black" Height="82" Padding="20" Background="#D6C4B0" Foreground="Black">
         </TextBlock>
 
-        <Button x:Name="image_button" Content="Pilih Citra" HorizontalAlignment="Left" Margin="60,149,0,0" VerticalAlignment="Top" Height="36" Width="114" RenderTransformOrigin="0.5,0.5" Foreground="#3C3633" Background="#FFA62F" FontSize="20" Click="ImageButton_Click" FontFamily="Tempus Sans ITC">
+        <Button x:Name="image_button" Content="Pilih Citra" HorizontalAlignment="Left" Margin="50,95,0,0" VerticalAlignment="Top" Height="25" Width="85" RenderTransformOrigin="0.5,0.5" Foreground="#3C3633" Background="#FFA62F" FontSize="12" Click="ImageButton_Click" FontFamily="Tempus Sans ITC">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="#EEEDEB" 
-                BorderBrush="NavajoWhite" 
-                BorderThickness="1" 
-                CornerRadius="18">
+                    <Border Background="#D6C4B0" 
+                BorderBrush="#102937" 
+                BorderThickness="1"
+                CornerRadius="8">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -39,59 +33,63 @@
             </Button.Style>
         </Button>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,153,0,0">
-            <RadioButton x:Name="radioButton1" VerticalContentAlignment="Center" GroupName="Options" IsChecked="True" Tag="BM" Width="48">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,95.15,0,0">
+            <RadioButton x:Name="radioButton1" VerticalContentAlignment="Center" GroupName="Options" IsChecked="True" Tag="BM" Width="45" Height="25">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="border1" Background="#EEEDEB" BorderBrush="NavajoWhite" BorderThickness="1" CornerRadius="15,0,0,15">
+                        <Border x:Name="border1" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="8,0,0,8">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="border1" Property="Background" Value="#3C3633"/>
+                                <Setter TargetName="border1" Property="Background" Value="#124D54"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </RadioButton.Template>
-                <TextBlock Text="BM" Foreground="#EEEDEB" FontFamily="Tempus Sans ITC" FontSize="14">
+                <TextBlock Text="BM" FontFamily="Tempus Sans ITC" FontSize="14">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Foreground" Value="White"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
                                     <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="Foreground" Value="Black"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
             </RadioButton>
-            <RadioButton x:Name="radioButton2" VerticalContentAlignment="Center" GroupName="Options" Tag="KMP" Width="59" Height="36">
+            <RadioButton x:Name="radioButton2" VerticalContentAlignment="Center" GroupName="Options" Tag="KMP" Width="45" Height="25">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="border2" Background="#EEEDEB" BorderBrush="NavajoWhite" BorderThickness="1" CornerRadius="0,15,15,0">
+                        <Border x:Name="border2" Background="#D6C4B0" BorderBrush="#102937" BorderThickness="1" CornerRadius="0,8,8,0">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,4"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="border2" Property="Background" Value="#ACD793"/>
+                                <Setter TargetName="border2" Property="Background" Value="#124D54"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </RadioButton.Template>
-                <TextBlock Text="KMP" Foreground="#3C3633" FontFamily="Tempus Sans ITC" FontSize="14">
+                <TextBlock Text="KMP" FontFamily="Tempus Sans ITC" FontSize="14">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Foreground" Value="White"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
                                     <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="Foreground" Value="Black"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -100,13 +98,14 @@
             </RadioButton>
         </StackPanel>
 
-        <Button x:Name="start" Content="CARI" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="114" FontFamily="Tempus Sans ITC" RenderTransformOrigin="0.5,0.5" Foreground="#3C3633" Background="CadetBlue" FontSize="20" Margin="451,143,0,0" Click="start_Click">
+
+        <Button x:Name="start" Content="CARI" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="114" FontFamily="Tempus Sans ITC" RenderTransformOrigin="0.5,0.5" Foreground="#3C3633" Background="CadetBlue" FontSize="20" Margin="636,393,0,0" Click="start_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="#EEEDEB" 
-                BorderBrush="NavajoWhite" 
+                    <Border Background="#D6C4B0" 
+                BorderBrush="#102937" 
                 BorderThickness="1" 
-                CornerRadius="18">
+                CornerRadius="9">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -123,15 +122,15 @@
             </Button.Style>
         </Button>
 
-        <Border BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left" Height="192" Margin="60,210,0,0" Background="#FFBBBBBB" CornerRadius="15" VerticalAlignment="Top" Width="152">
+        <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Left" Margin="50,132,0,0" Background="#124D54" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
             <Image x:Name="imageControl" Stretch="Uniform" Margin="10"/>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left" Height="192" Margin="256,210,0,0" Background="#FFBBBBBB" CornerRadius="15" VerticalAlignment="Top" Width="152">
+        <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Center" Margin="0,132,0,0" Background="#124D54" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="224">
             <Image x:Name="imageFound" Stretch="Uniform" Margin="10"/>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1.5" HorizontalAlignment="Left" Height="192" Margin="451,210,0,0" Background="#FFBBBBBB" CornerRadius="15" VerticalAlignment="Top" Width="152">
+        <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Right" Margin="0,132,50,0" Background="#124D54" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
             <Image x:Name="biodata" Stretch="Uniform" Margin="10"/>
         </Border>
     </Grid>

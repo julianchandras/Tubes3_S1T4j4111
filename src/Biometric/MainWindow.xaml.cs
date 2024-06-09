@@ -22,7 +22,7 @@ namespace Biometric
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private BitmapImage sidikJari = new BitmapImage();
+        private BitmapImage sidikJari = null;
         private string algorithm = "BM";
 
         public MainWindow()
@@ -92,8 +92,8 @@ namespace Biometric
                 try
                 {
                     // Load the selected image file into the image control
-                    BitmapImage bitmapImage = new BitmapImage(new Uri(openFileDialog.FileName));
-                    imageControl.Source = bitmapImage;
+                    sidikJari = new BitmapImage(new Uri(openFileDialog.FileName));
+                    imageControl.Source = sidikJari;
                 }
                 catch (Exception ex)
                 {
@@ -102,15 +102,52 @@ namespace Biometric
             }
         }
 
-        private void start_Click (object sender, RoutedEventArgs e)
+        private string showPerson(Person p)
         {
-            // Initialize the application
-            if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
+            string ret = "";
+            ret += "NIK: " + p.NIK + "\n";
+            ret += "Nama: " + p.Nama + "\n";
+            ret += "Tempat lahir: " + p.TempatLahir + "\n";
+            DateTime dt = p.TanggalLahir.GetValueOrDefault();
+            ret += "Tanggal lahir: " + dt.Day + "-" + dt.Month + "-" + dt.Year + "\n";
+            ret += "Jenis Kelamin: " + p.JenisKelamin + "\n";
+            ret += "Alamat: " + p.Alamat + "\n";
+            ret += "Agama: " + p.Agama + "\n";
+            ret += "Status Perkawinan: " + p.StatusPerkawinan + "\n";
+            ret += "Pekerjaan: " + p.Pekerjaan + "\n";
+            ret += "Kewarganegaraan: " + p.Kewarganegaraan;
+
+            return ret;
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void start_Click (object sender, RoutedEventArgs e)
         {
+            if (sidikJari == null)
+            {
+                MessageBox.Show("Mohon pilih sebuah gambar");
+            } 
+            else
+            {
+                if (radioButton2.IsChecked == true) { algorithm = "KMP"; }
+                Person tempPerson = new Person
+                {
+                    NIK = "13522080",  // Assuming this is the NIK
+                    Nama = "Julian Chan",
+                    TempatLahir = "Tangerang",
+                    TanggalLahir = new DateTime(2004, 4, 10), // Example date of birth
+                    JenisKelamin = "Laki-Laki",
+                    GolonganDarah = "O",
+                    Alamat = "Jl. Sudirman No. 10",
+                    Agama = "Katolik",
+                    StatusPerkawinan = "HTS",
+                    Pekerjaan = "Mahasiswa",
+                    Kewarganegaraan = "Indonesia",
+                };
 
+                textExTime.Text = "Waktu eksekusi: 5 ms";
+                textPercentage.Text = "Tingkat kemiripan: 100%";
+                biodata.Text = showPerson(tempPerson);
+            }
         }
     }
 }

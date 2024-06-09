@@ -8,7 +8,7 @@
         Title="MainWindow" Height="468" Width="800"
         ResizeMode="NoResize">
     <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800">
-        <TextBlock x:Name="Header" TextWrapping="Wrap" Text="SI TAJAM" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cascadia Code" Height="82" Padding="20" Background="#FF094044" Foreground="#E1D9CF" FontWeight="Bold">
+        <TextBlock x:Name="Header" TextWrapping="Wrap" Text="S1 T4J4111" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cascadia Code" Height="82" Padding="20" Background="#FF094044" Foreground="#E1D9CF" FontWeight="Bold">
         </TextBlock>
 
         <Button x:Name="image_button" Content="PILIH CITRA" HorizontalAlignment="Left" Margin="50,95,0,0" VerticalAlignment="Top" Height="25" Width="95" RenderTransformOrigin="0.5,0.5" Foreground="#3C3633" Background="#FFA62F" FontSize="12" Click="ImageButton_Click" FontFamily="Cascadia Code">
@@ -133,10 +133,12 @@
         </Border>
 
         <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Right" Margin="0,132,50,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
-            <Image x:Name="biodata" Stretch="Uniform" Margin="10"/>
+            <TextBlock x:Name="biodata" Text="" Margin="10" Foreground="Black" FontFamily="Cascadia Code" FontSize="12"/>
         </Border>
 
-        <Image Margin="0,331,694,0" Source="assets/Tomnook.png" Stretch="Uniform"/>
+        <Image Margin="-24,315,690,-3" Source="assets/Tomnook.png" Stretch="Uniform"/>
 		<Image Margin="566,-3,86,347" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
+		<TextBlock x:Name="textExTime" HorizontalAlignment="Right" Margin="0,92,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
+		<TextBlock x:Name="textPercentage" HorizontalAlignment="Right" Margin="0,111,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
 	</Grid>
 </Window>

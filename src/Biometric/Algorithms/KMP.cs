@@ -8,7 +8,7 @@ namespace Biometric.Algorithms
 {
     class KMP
     {
-        public static int KMPmatch(string text, string pattern)
+        public static int kmpMatch(string text, string pattern)
         {
             int n = text.Length;
             int m = pattern.Length;

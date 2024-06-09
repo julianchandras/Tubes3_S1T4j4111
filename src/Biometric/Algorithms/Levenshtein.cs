@@ -1,6 +1,6 @@
-namespace Biometric.Controller
+namespace Biometric.Algorithms
 {
-    public static class Levenshtein
+    class Levenshtein
     {
         public static int levenshteinDistance(string string1, string string2)
         {
@@ -22,26 +22,6 @@ namespace Biometric.Controller
             }
 
             return d[string1.Length, string2.Length];
-        }
-
-
-        public static (int, int) findClosestSubstring(string text, string pattern)
-        {
-            int minDistance = int.MaxValue;
-            int startIndex = -1;
-
-            for (int i = 0; i <= text.Length - pattern.Length; i++)
-            {
-                string substring = text.Substring(i, pattern.Length);
-                int distance = levenshteinDistance(substring, pattern);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    startIndex = i;
-                }
-            }
-
-            return (startIndex, minDistance);
         }
     }
 }

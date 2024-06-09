@@ -4,13 +4,12 @@ using Emgu.CV.CvEnum;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
-using System.IO;
 
 namespace Biometric.Controller
 {
     class FingerprintReader
     {
-        public static (Mat, Mat) createSegmentedImg(Mat img, int w, double threshold)
+        private static (Mat, Mat) createSegmentedImg(Mat img, int w, double threshold)
         {
             int width = img.Cols;
             int height = img.Rows;
@@ -63,7 +62,7 @@ namespace Biometric.Controller
             return (normalizedImage, mask);
         }
 
-        public static Mat applyMorphologicalOperations(Mat img, int size)
+        private static Mat applyMorphologicalOperations(Mat img, int size)
         {
             Mat kernel = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(size, size), new Point(-1, -1));
             Mat result = new Mat();
@@ -74,7 +73,7 @@ namespace Biometric.Controller
             return result;
         }
 
-        public static Mat normalizeImage(Mat img, Mat mask)
+        private static Mat normalizeImage(Mat img, Mat mask)
         {
             Mat result = new Mat(img.Size, DepthType.Cv64F, 1);
 
@@ -120,14 +119,14 @@ namespace Biometric.Controller
         }
 
 
-        public static Mat convertToBinary(Mat img)
+        private static Mat convertToBinary(Mat img)
         {
             Mat binaryImg = new Mat();
             CvInvoke.AdaptiveThreshold(img, binaryImg, 255, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 11, 2);
             return binaryImg;
         }
 
-        public static Mat extractCenterRegion(Mat img, Mat mask, int width, int height)
+        private static Mat extractCenterRegion(Mat img, Mat mask, int width, int height)
         {
             Moments moments = CvInvoke.Moments(mask, true);
             int cx = (int)(moments.M10 / moments.M00);
@@ -143,7 +142,7 @@ namespace Biometric.Controller
             return new Mat(img, center);
         }
 
-        public static List<string> convertToAscii(Mat binaryImage)
+        private static List<string> convertToAscii(Mat binaryImage)
         {
             List<string> patterns = new List<string>();
             IntPtr dataPtr = binaryImage.DataPointer;
@@ -175,35 +174,27 @@ namespace Biometric.Controller
             return patterns;
         }
 
-        public static void printBinaryImage(Mat binaryImage)
+        public static List<string> imgToPattern(string inputFilePath)
         {
-            unsafe
-            {
-                byte* data = (byte*)binaryImage.DataPointer;
-                for (int y = 0; y < binaryImage.Rows; y++)
-                {
-                    for (int x = 0; x < binaryImage.Cols; x++)
-                    {
-                        byte pixel = data[y * binaryImage.Step + x];
-                        Console.Write(pixel == 0 ? "0 " : "1 ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-        }
-
-        public static List<string> imgToPattern(string filePath, int blockSize, double threshold)
-        {
-            Mat img = CvInvoke.Imread(filePath, ImreadModes.Grayscale);
+            Mat img = CvInvoke.Imread(inputFilePath, ImreadModes.Grayscale);
+            int blockSize = 16;
+            double threshold = 0.6;
             var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
             Mat centerRegion = extractCenterRegion(normalizedImage, mask, 64, 64);
             Mat binaryCenterRegion = convertToBinary(centerRegion);
             return convertToAscii(binaryCenterRegion);
         }
 
-        public static string imgToAscii(string filePath, int blockSize, double threshold)
+        public static string imgToText(string inputFilePath)
         {
-            List<string> patterns = imgToPattern(filePath, blockSize, threshold);
+            Mat img = CvInvoke.Imread(inputFilePath, ImreadModes.Grayscale);
+            int blockSize = 16;
+            double threshold = 0.6;
+            var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
+            Mat maskedNormalizedImage = new Mat();
+            normalizedImage.CopyTo(maskedNormalizedImage, mask);
+            Mat binaryImage = convertToBinary(maskedNormalizedImage);
+            List<string> patterns = convertToAscii(binaryImage);
             StringBuilder sb = new StringBuilder();
             foreach (string line in patterns)
             {

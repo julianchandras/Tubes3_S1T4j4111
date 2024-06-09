@@ -22,7 +22,7 @@ namespace Biometric.Repository
         {
             using (IDbConnection db = new MySqlConnection(_connnectionString))
             {
-                string sql = "SELECT * FROM fingerprint";
+                string sql = "SELECT * FROM sidik_jari";
                 return await db.QueryAsync<Fingerprint>(sql);
             }
         }

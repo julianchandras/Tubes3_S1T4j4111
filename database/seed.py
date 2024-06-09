@@ -1,4 +1,5 @@
 import json
+import re
 import os
 from faker import Faker
 import random
@@ -9,7 +10,51 @@ import subprocess
 
 load_dotenv("../.env")
 
-def load_data(persons):
+def make_name_alay(name):
+    word = [
+        "([aA4])?",    # A
+        "[bB8]",       # B
+        "[cC]",        # C
+        "[dD]",        # D
+        "([eE3])?",    # E
+        "[fF]",        # F
+        "[gG6]",       # G
+        "[hH]",        # H
+        "([iI1])?",    # I
+        "[jJ]",        # J
+        "[kK]",        # K
+        "[lL]",        # L
+        "([mM]|111)",  # M
+        "([nN]|11)",   # N
+        "([oO0])?",    # O
+        "[pP]",        # P
+        "[qQ]",        # Q
+        "([rR]|12)",   # R
+        "[sS5]",       # S
+        "[tT]",        # T
+        "([uU])?",     # U
+        "[vV]",        # V
+        "[wW]",        # W
+        "[xX]",        # X
+        "[yY]",        # Y
+        "[zZ2]"        # Z
+    ]
+
+    alay_name = ""
+    for char in name:
+        idx = ord(char.upper()) - ord('A')
+        if 0 <= idx < len(word):
+            pattern = word[idx]
+            matches = re.findall(pattern, pattern)
+            if matches:
+                alay_name += random.choice(matches)
+        else:
+            # If the character is not a letter, add it unchanged
+            alay_name += char
+
+    return alay_name
+
+def load_biodata(persons):
     db_config = {
         'user': os.getenv('DB_USER'),
         'password': os.getenv('DB_PASS'),
@@ -25,11 +70,42 @@ def load_data(persons):
                   "VALUES (%(NIK)s, %(nama)s, %(tempat_lahir)s, %(tanggal_lahir)s, %(jenis_kelamin)s, %(golongan_darah)s, %(alamat)s, %(agama)s, %(status_perkawinan)s, %(pekerjaan)s, %(kewarganegaraan)s)")
 
     for person in persons:
+        person["nama"] = make_name_alay(person["nama"])
         cursor.execute(add_person, person)
 
     connection.commit()
     cursor.close()
     connection.close()
+
+def load_fingerprints(persons):
+    db_config = {
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASS'),
+        'host': os.getenv('DB_SERVER'),
+        'database': os.getenv('DB_DATABASE')
+    }
+
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+
+    files = os.listdir("../test/real/")
+    sorted(files)
+
+    j = 0
+    for person in persons:
+        for i in range(10):
+            fingerprint_entry = {
+                "berkas_citra" : files[j],
+                "nama" : person["nama"]
+            }
+            add_fingerprint = ("INSERT INTO sidik_jari "
+                               "(berkas_citra, nama) VALUES (%(berkas_citra)s, %(nama)s)")  
+            cursor.execute(add_fingerprint, fingerprint_entry)
+            j += 1
+
+    connection.commit()
+    cursor.close()
+    connection.close
 
 fake = Faker('id_ID')  # Indonesian locale for relevant names and addresses
 
@@ -73,7 +149,7 @@ def generate_person():
     
     return person
 
-def seed_persons(n=600):
+def seed_persons(n=20):
     persons = [generate_person() for _ in range(n)]
     return persons
 
@@ -90,8 +166,10 @@ def reset():
     cursor = connection.cursor()
 
     delete_biodata = ("DELETE FROM Biodata")
+    delete_fingerprint = ("DELETE FROM sidik_jari")
 
     cursor.execute(delete_biodata)
+    cursor.execute(delete_fingerprint)
 
     connection.commit()
     cursor.close()
@@ -100,4 +178,5 @@ def reset():
 if __name__ == "__main__":
     reset()
     persons = seed_persons()
-    load_data(persons)
+    load_fingerprints(persons)
+    load_biodata(persons)

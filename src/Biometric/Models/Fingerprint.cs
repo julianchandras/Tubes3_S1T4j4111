@@ -9,7 +9,7 @@ namespace Biometric.Models
 {
     class Fingerprint
     {
-        public string? BerkasCitra { get; set; }
+        public string? berkas_citra { get; set; }
         public string? nama { get; set; }
     }
 }

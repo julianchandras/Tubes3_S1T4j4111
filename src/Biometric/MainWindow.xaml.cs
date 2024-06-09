@@ -48,16 +48,16 @@ namespace Biometric
                 Person test = new Person
                 {
                     NIK = "13522080",  // Assuming this is the NIK
-                    Nama = "John Doe",
-                    TempatLahir = "Jakarta",
-                    TanggalLahir = new DateTime(1990, 1, 1), // Example date of birth
-                    JenisKelamin = "Laki-Laki",
-                    GolonganDarah = "O",
-                    Alamat = "Jl. Sudirman No. 10",
-                    Agama = "Islam",
-                    StatusPerkawinan = "Belum Menikah",
-                    Pekerjaan = "Developer",
-                    Kewarganegaraan = "Indonesia",
+                    nama = "John Doe",
+                    tempat_lahir= "Jakarta",
+                    tanggal_lahir = new DateTime(1990, 1, 1), // Example date of birth
+                    jenis_kelamin = "Laki-Laki",
+                    golongan_darah = "O",
+                    alamat = "Jl. Sudirman No. 10",
+                    agama = "Islam",
+                    status_perkawinan = "Belum Menikah",
+                    pekerjaan = "Developer",
+                    kewarganegaraan = "Indonesia",
                 };
                 MessageBox.Show(test.ToString());
 
@@ -96,16 +96,16 @@ namespace Biometric
         {
             string ret = "";
             ret += "NIK: " + p.NIK + "\n";
-            ret += "Nama: " + p.Nama + "\n";
-            ret += "Tempat lahir: " + p.TempatLahir + "\n";
-            DateTime dt = p.TanggalLahir.GetValueOrDefault();
+            ret += "Nama: " + p.nama + "\n";
+            ret += "Tempat lahir: " + p.tempat_lahir + "\n";
+            DateTime dt = p.tanggal_lahir.GetValueOrDefault();
             ret += "Tanggal lahir: " + dt.Day + "-" + dt.Month + "-" + dt.Year + "\n";
-            ret += "Jenis Kelamin: " + p.JenisKelamin + "\n";
-            ret += "Alamat: " + p.Alamat + "\n";
-            ret += "Agama: " + p.Agama + "\n";
-            ret += "Status Perkawinan: " + p.StatusPerkawinan + "\n";
-            ret += "Pekerjaan: " + p.Pekerjaan + "\n";
-            ret += "Kewarganegaraan: " + p.Kewarganegaraan;
+            ret += "Jenis Kelamin: " + p.jenis_kelamin+ "\n";
+            ret += "Alamat: " + p.alamat+ "\n";
+            ret += "Agama: " + p.agama + "\n";
+            ret += "Status Perkawinan: " + p.status_perkawinan+ "\n";
+            ret += "Pekerjaan: " + p.pekerjaan + "\n";
+            ret += "Kewarganegaraan: " + p.kewarganegaraan;
 
             return ret;
         }
@@ -131,28 +131,17 @@ namespace Biometric
                 string connectionString = $"Server={server};User={user};Password={password};Database={database};";
 
                 List<string> names;
+                IEnumerable<Person> allPersons;
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     PersonRepository pr = new PersonRepository(connectionString);
 
-                    IEnumerable<Person> allPersons = await pr.GetAllPersonsAsync();
+                    allPersons = await pr.GetAllPersonsAsync();
 
-                    names = allPersons.Select(person => person.Nama).ToList();
+                    names = allPersons.Select(person => person.nama).ToList();
                 }
-                Person tempPerson = new Person
-                {
-                    NIK = "13522080",  // Assuming this is the NIK
-                    Nama = "Julian Chan",
-                    TempatLahir = "Tangerang",
-                    TanggalLahir = new DateTime(2004, 4, 10), // Example date of birth
-                    JenisKelamin = "Laki-Laki",
-                    GolonganDarah = "O",
-                    Alamat = "Jl. Sudirman No. 10",
-                    Agama = "Katolik",
-                    StatusPerkawinan = "HTS",
-                    Pekerjaan = "Mahasiswa",
-                    Kewarganegaraan = "Indonesia",
-                };
+                Person tempPerson = allPersons.ToList()[0];
+
 
                 textExTime.Text = "Waktu eksekusi: 5 ms";
                 textPercentage.Text = "Tingkat kemiripan: 100%";

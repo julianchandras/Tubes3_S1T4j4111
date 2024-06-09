@@ -51,6 +51,10 @@ namespace Biometric
                     MessageBox.Show("Error loading image: " + ex.Message);
                 }
             }
+            else
+            {
+                EnableControls();
+            }
         }
 
         private string showPerson(Person p, string realName)
@@ -88,11 +92,24 @@ namespace Biometric
             }
         }
 
+        public void EnableControls()
+        {
+            image_button.IsEnabled = true;
+            radioButton1.IsEnabled = true;
+            radioButton2.IsEnabled = true;
+            start.IsEnabled = true;
+        }
+
         private async void start_Click(object sender, RoutedEventArgs e)
         {
             if (sidikJari == null)
             {
-                MessageBox.Show("Mohon pilih sebuah gambar");
+                NoImage box = new NoImage();
+                box.Show();
+                image_button.IsEnabled = false;
+                radioButton1.IsEnabled = false;
+                radioButton2.IsEnabled = false;
+                start.IsEnabled = false;
             }
             else
             {

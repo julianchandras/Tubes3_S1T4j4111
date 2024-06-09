@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Biometric"
         mc:Ignorable="d"
         Title="MainWindow" Height="468" Width="800"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+		WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<!-- Invisible ScrollBar Style -->
 		<Style TargetType="ScrollBar">

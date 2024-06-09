@@ -3,7 +3,7 @@
 
 ## Daftar Konten
 * [Informasi Umum](#informasi-umum)
-* [Deskripsi Singkat](#deskripsi-singkat)
+* [Deskripsi Singkat Algoritma](#deskripsi-singkat-algoritma)
 * [Kebutuhan](#kebutuhan)
 * [Setup dan Penggunaan](#setup-dan-penggunaan)
 * [Setup Database](#setup-database)
@@ -12,7 +12,7 @@
 ## Informasi Umum
 Pemanfaatan Pattern Matching dalam Membangun Sistem Deteksi Individu Berbasis Biometrik Melalui Citra Sidik Jari
 
-## Deskripsi Singkat
+## Deskripsi Singkat Algoritma
 ### Boyer Moore
 Algoritma Boyer-Moore (BM) merupakan algoritma pencocokan teks yang didasarkan pada dua teknik, yaitu teknik _looking-glass_ dan teknik _character-jump_. Teknik _looking-glass_ adalah teknik pencocokan yang pengecekan karakternya dimulai dari indeks terakhir pola. Algoritma ini memanfaatkan array _last-occurence_ yang menyimpan kemunculan terakhir suatu karakter.
 ### Knuth Morris Pratt

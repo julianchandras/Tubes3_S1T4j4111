@@ -71,24 +71,5 @@ namespace Biometric.Algorithms
             }
             return "";
         }
-
-    /*    public static void Main(string[] args) {
-            List<string> tester = new List<string>();
-            tester.Add("Ayam Goren6");
-            tester.Add("4yam GoR3ng");
-            tester.Add("Ay4m Gorng");
-            tester.Add("Aya111 Goreng");
-            tester.Add("ym Grng");
-            tester.Add("ini beda");
-
-            RegularExpression r = new RegularExpression("ayam goreng");
-            
-            List<string> hasil = new List<string>();
-            hasil = r.compareAll(tester);
-            
-            foreach (string a in hasil) {
-                Console.WriteLine(a);
-            }
-        }*/
     }
 }

@@ -205,8 +205,6 @@ namespace Biometric.Controller
             int blockSize = 16;
             double threshold = 0.6;
             var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
-            // Mat maskedNormalizedImage = new Mat();
-            // normalizedImage.CopyTo(maskedNormalizedImage, mask);
             Mat binaryImage = convertToBinary(normalizedImage);
             List<string> patterns = convertToAscii(binaryImage);
             StringBuilder sb = new StringBuilder();
@@ -216,49 +214,5 @@ namespace Biometric.Controller
             }
             return sb.ToString();
         }
-
-        /*public static void Main(string[] args)
-        {
-            Console.WriteLine("starting converting from bmp to greyscale");
-            string inputFilePath = @"C:\Users\Salsabiila\OneDrive - Institut Teknologi Bandung\Kuliah\Semester4\Stima\Tubes3\Tubes3_S1T4j4111\src\Biometric\Controller\9__M_Left_index_finger.BMP";
-            if (!File.Exists(inputFilePath))
-            {
-                Console.WriteLine($"File {inputFilePath} not found.");
-                return;
-            }
-            Mat img = CvInvoke.Imread(inputFilePath, ImreadModes.Grayscale);
-            Console.WriteLine("segmenting and normalizing image");
-
-            int blockSize = 16;
-            double threshold = 0.6;
-
-            var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
-
-            string segmentedImagePath = @"C:\Users\Salsabiila\OneDrive - Institut Teknologi Bandung\Kuliah\Semester4\Stima\Tubes3\Tubes3_S1T4j4111\src\Biometric\Controller\segmentedImage.bmp";
-            string normalizedImagePath = @"C:\Users\Salsabiila\OneDrive - Institut Teknologi Bandung\Kuliah\Semester4\Stima\Tubes3\Tubes3_S1T4j4111\src\Biometric\Controller\normalizedImage.bmp";
-            // CvInvoke.Imwrite(segmentedImagePath, segmentedImage);
-            CvInvoke.Imwrite(normalizedImagePath, normalizedImage);
-
-            Mat normalized_binary = convertToBinary(normalizedImage);
-            List<string> normalized_ascii = convertToAscii(normalized_binary);
-           
-            Console.WriteLine("Segmented and normalized images have been saved.");
-
-            Console.WriteLine("getting the center");
-
-            Mat centerRegion = extractCenterRegion(normalizedImage, mask, 64, 64);
-
-            Console.WriteLine("converting to binary");
-            Mat binaryCenterRegion = convertToBinary(centerRegion);
-            Console.WriteLine("Binary Center Region:");
-            printBinaryImage(binaryCenterRegion);
-
-            Console.WriteLine("converting to ascii");
-            List<string> patterns = convertToAscii(binaryCenterRegion);
-            foreach (String line in patterns)
-            {
-                Console.WriteLine(line);
-            }
-        }*/
     }
 }

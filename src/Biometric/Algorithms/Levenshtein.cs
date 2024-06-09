@@ -23,5 +23,22 @@ namespace Biometric.Algorithms
 
             return d[string1.Length, string2.Length];
         }
+
+        public static int findClosestSubstring(string text, string pattern)
+        {
+            int minDistance = int.MaxValue;
+
+            for (int i = 0; i <= text.Length - pattern.Length; i++)
+            {
+                string substring = text.Substring(i, pattern.Length);
+                int distance = levenshteinDistance(substring, pattern);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                }
+            }
+
+            return minDistance;
+        }
     }
 }

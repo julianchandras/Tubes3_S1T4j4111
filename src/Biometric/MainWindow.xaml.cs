@@ -189,16 +189,23 @@ namespace Biometric
                     bestMatchPerson = await pr.GetPersonByNameAsync(bestMatchName);
                 }
 
+                stopwatch.Stop();
                 String absolutePath = Path.GetFullPath(@"..\..\test\real\" + res.berkas_citra);
                 Uri imageUri = new Uri(absolutePath);
                 sidikJariHasil = new BitmapImage(imageUri);
                 imageFound.Source = sidikJariHasil;
-                stopwatch.Stop();
 
                 textExTime.Text = $"Waktu eksekusi: {stopwatch.ElapsedMilliseconds} ms";
                 similarity = similarity * 100;
+                if (similarity < 70)
+                {
+                    absolutePath = Path.GetFullPath()
+                } 
+                else
+                {
+                    biodata.Text = showPerson(bestMatchPerson, res.nama);
+                }
                 textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
-                biodata.Text = showPerson(bestMatchPerson, res.nama);
                 EnableControls();
             }
         }

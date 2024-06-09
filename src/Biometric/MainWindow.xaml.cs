@@ -199,13 +199,18 @@ namespace Biometric
                 similarity = similarity * 100;
                 if (similarity < 70)
                 {
-                    absolutePath = Path.GetFullPath()
-                } 
+                    absolutePath = Path.GetFullPath(@"assets\Tomnook-NotFound.png");
+                    imageUri = new Uri(absolutePath);
+                    sidikJariHasil = new BitmapImage(imageUri);
+                    imageFound.Source = sidikJariHasil;
+                    biodata.Text = "Image not found";
+                    textPercentage.Text = $"Tingkat kemiripan: NaN";
+                }   
                 else
                 {
                     biodata.Text = showPerson(bestMatchPerson, res.nama);
+                    textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
                 }
-                textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
                 EnableControls();
             }
         }

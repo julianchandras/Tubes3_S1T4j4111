@@ -85,6 +85,14 @@ namespace Biometric
             }
         }
 
+        private void DisableControls()
+        {
+            image_button.IsEnabled = false;
+            radioButton1.IsEnabled = false;
+            radioButton2.IsEnabled = false;
+            start.IsEnabled = false;
+        }
+
         public void EnableControls()
         {
             image_button.IsEnabled = true;
@@ -99,13 +107,11 @@ namespace Biometric
             {
                 NoImage box = new NoImage();
                 box.Show();
-                image_button.IsEnabled = false;
-                radioButton1.IsEnabled = false;
-                radioButton2.IsEnabled = false;
-                start.IsEnabled = false;
+                DisableControls();
             }
             else
             {
+                DisableControls();
                 Env.Load("..\\..\\.env");
                 string server = Env.GetString("DB_SERVER");
                 string user = Env.GetString("DB_USER");
@@ -193,6 +199,7 @@ namespace Biometric
                 similarity = similarity * 100;
                 textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
                 biodata.Text = showPerson(bestMatchPerson, res.nama);
+                EnableControls();
             }
         }
 

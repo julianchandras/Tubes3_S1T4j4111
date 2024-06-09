@@ -114,7 +114,7 @@
 								</DataTrigger>
 								<DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="False">
 									<Setter Property="FontWeight" Value="Normal"/>
-									<Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Foreground" Value="#3C3633"/>
 								</DataTrigger>
 								<DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" Value="True">
 									<Setter Property="FontWeight" Value="Bold"/>

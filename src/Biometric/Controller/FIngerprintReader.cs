@@ -138,9 +138,23 @@ namespace Biometric.Controller
             x = Math.Min(x, img.Cols - width);
             y = Math.Min(y, img.Rows - height);
 
+            x = (x / 8) * 8;
+            y = (y / 8) * 8;
+
+            if (x + width > img.Cols)
+            {
+                x = img.Cols - width;
+            }
+
+            if (y + height > img.Rows)
+            {
+                y = img.Rows - height;
+            }
+
             Rectangle center = new Rectangle(x, y, width, height);
             return new Mat(img, center);
         }
+
 
         private static List<string> convertToAscii(Mat binaryImage)
         {
@@ -180,9 +194,9 @@ namespace Biometric.Controller
             int blockSize = 16;
             double threshold = 0.6;
             var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
-            Mat centerRegion = extractCenterRegion(normalizedImage, mask, 64, 64);
-            Mat binaryCenterRegion = convertToBinary(centerRegion);
-            return convertToAscii(binaryCenterRegion);
+            Mat binaryImage = convertToBinary(normalizedImage);
+            Mat centerRegion = extractCenterRegion(binaryImage, mask, 64, 64);
+            return convertToAscii(centerRegion);
         }
 
         public static string imgToText(string inputFilePath)
@@ -191,9 +205,9 @@ namespace Biometric.Controller
             int blockSize = 16;
             double threshold = 0.6;
             var (normalizedImage, mask) = createSegmentedImg(img, blockSize, threshold);
-            Mat maskedNormalizedImage = new Mat();
-            normalizedImage.CopyTo(maskedNormalizedImage, mask);
-            Mat binaryImage = convertToBinary(maskedNormalizedImage);
+            // Mat maskedNormalizedImage = new Mat();
+            // normalizedImage.CopyTo(maskedNormalizedImage, mask);
+            Mat binaryImage = convertToBinary(normalizedImage);
             List<string> patterns = convertToAscii(binaryImage);
             StringBuilder sb = new StringBuilder();
             foreach (string line in patterns)

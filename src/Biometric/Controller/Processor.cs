@@ -27,7 +27,6 @@ namespace Biometric.Controller
             string text = FingerprintReader.imgToText(compImg);
             foreach (string pattern in inputPatterns)
             {
-                Console.WriteLine("Pattern: " + pattern);
                 if (Algorithms.BM.bmMatch(text, pattern) == -1)
                 {
                     return false;

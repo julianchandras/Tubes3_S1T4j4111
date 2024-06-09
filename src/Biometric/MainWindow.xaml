@@ -7,7 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="468" Width="800"
         ResizeMode="NoResize">
-    <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800">
+	<Window.Resources>
+		<!-- Invisible ScrollBar Style -->
+		<Style TargetType="ScrollBar">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Width" Value="0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ScrollBar">
+						<Grid x:Name="GridRoot" Background="Transparent" Width="{TemplateBinding Width}">
+							<Track x:Name="PART_Track" IsDirectionReversed="True">
+								<Track.Thumb>
+									<Thumb Background="Transparent" Width="{TemplateBinding Width}"/>
+								</Track.Thumb>
+							</Track>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+    <Grid Background="#E1D9CF" HorizontalAlignment="Left" Width="800" Margin="-3,0,0,0">
         <TextBlock x:Name="Header" TextWrapping="Wrap" Text="S1 T4J4111" VerticalAlignment="Top" TextAlignment="Center" FontSize="36" FontFamily="Cascadia Code" Height="82" Padding="20" Background="#FF094044" Foreground="#E1D9CF" FontWeight="Bold">
         </TextBlock>
 
@@ -133,11 +153,13 @@
         </Border>
 
         <Border BorderBrush="#102937" BorderThickness="1.5" HorizontalAlignment="Right" Margin="0,132,50,0" Background="#FFC4705A" CornerRadius="15" VerticalAlignment="Top" Height="250" Width="225">
-            <TextBlock x:Name="biodata" Text="" Margin="10" Foreground="Black" FontFamily="Cascadia Code" FontSize="12"/>
-        </Border>
+			<ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10">
+				<TextBlock x:Name="biodata" Text="" Foreground="Black" FontFamily="Cascadia Code" FontSize="12" TextWrapping="Wrap"/>
+			</ScrollViewer>
+		</Border>
 
         <Image Margin="-24,315,690,-3" Source="assets/Tomnook.png" Stretch="Uniform"/>
-		<Image Margin="566,-3,86,347" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
+		<Image Margin="524,0,130,350" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
 		<TextBlock x:Name="textExTime" HorizontalAlignment="Right" Margin="0,92,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
 		<TextBlock x:Name="textPercentage" HorizontalAlignment="Right" Margin="0,111,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
 	</Grid>

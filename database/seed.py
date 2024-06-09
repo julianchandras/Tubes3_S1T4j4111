@@ -149,7 +149,7 @@ def generate_person():
     
     return person
 
-def seed_persons(n=20):
+def seed_persons(n=600):
     persons = [generate_person() for _ in range(n)]
     return persons
 

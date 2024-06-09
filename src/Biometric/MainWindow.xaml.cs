@@ -80,7 +80,7 @@ namespace Biometric
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp|All files (*.*)|*.*";
+            openFileDialog.Filter = "Image files (*.bmp)|*.bmp";
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -99,11 +99,12 @@ namespace Biometric
             }
         }
 
-        private string showPerson(Person p)
+        private string showPerson(Person p, string realName)
         {
             string ret = "";
             ret += "NIK: " + p.NIK + "\n";
-            ret += "Nama: " + p.nama + "\n";
+            ret += "Nama Alay: " + p.nama + "\n";
+            ret += "Nama: " + realName + "\n";
             ret += "Tempat lahir: " + p.tempat_lahir + "\n";
             DateTime dt = p.tanggal_lahir.GetValueOrDefault();
             ret += "Tanggal lahir: " + dt.Day + "-" + dt.Month + "-" + dt.Year + "\n";
@@ -236,7 +237,7 @@ namespace Biometric
                 textExTime.Text = $"Waktu eksekusi: {stopwatch.ElapsedMilliseconds} ms";
                 similarity = similarity * 100;
                 textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
-                biodata.Text = showPerson(bestMatchPerson);
+                biodata.Text = showPerson(bestMatchPerson, res.nama);
             }
         }
 
@@ -296,7 +297,6 @@ namespace Biometric
                 if (File.Exists(absPath))
                 {
                     {
-                        Console.WriteLine($"lagi nyari di {absPath}");
                         if (p.bmComparator(absPath))
                         {
                             found = true;
@@ -332,7 +332,6 @@ namespace Biometric
                     if (File.Exists(absPath))
                     {
                         {
-                            Console.WriteLine($"lagi nyari di {absPath}");
                             Console.WriteLine(found);
                             if (p.bmComparator(absPath))
                             {

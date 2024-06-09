@@ -206,7 +206,7 @@ namespace Biometric
                     }
                 }
 
-                RegularExpression r = new RegularExpression(res.nama);
+                RegularExpression regexPerson = new RegularExpression(res.nama);
 
                 List<string> names;
                 IEnumerable<Person> allPersons;
@@ -218,7 +218,14 @@ namespace Biometric
 
                     names = allPersons.Select(person => person.nama).ToList();
                 }
-                Person tempPerson = allPersons.ToList()[0];
+                string bestMatchName = regexPerson.compare(names);
+                Person bestMatchPerson;
+
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    PersonRepository pr = new PersonRepository(connectionString);
+                    bestMatchPerson = await pr.GetPersonByNameAsync(bestMatchName);
+                }
 
                 String absolutePath = Path.GetFullPath(@"..\..\test\real\" + res.berkas_citra);
                 Uri imageUri = new Uri(absolutePath);
@@ -230,8 +237,7 @@ namespace Biometric
                 textExTime.Text = $"Waktu eksekusi: {stopwatch.ElapsedMilliseconds} ms";
                 similarity = similarity * 100;
                 textPercentage.Text = $"Tingkat kemiripan: {similarity.ToString("F2")}%";
-                biodata.Text = showPerson(tempPerson);
-
+                biodata.Text = showPerson(bestMatchPerson);
             }
         }
 

@@ -35,6 +35,15 @@ namespace Biometric.Repository
             }
         }
 
+        public async Task<Person> GetPersonByNameAsync(string _nama)
+        {
+            using (IDbConnection db = new MySqlConnection(_connectionString))
+            {
+                string sql = "SELECT * FROM biodata WHERE nama = @nama";
+                return await db.QueryFirstOrDefaultAsync<Person>(sql, new { nama = _nama });
+            }
+        }
+
         // Inserts a new person into the database
         public async Task<int> InsertPersonAsync(Person person)
         {

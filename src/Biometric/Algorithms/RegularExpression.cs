@@ -63,14 +63,13 @@ namespace Biometric.Algorithms
             return regexText;
         }
 
-        public List<string> compareAll(List<string> inputs) {
-            List<string> retVal = new List<string>();
+        public string compare(List<string> inputs) {
             foreach (string input in inputs) {
                 if (Regex.IsMatch(input, regexText)) {
-                    retVal.Add(input);
+                    return input;
                 }
             }
-            return retVal;
+            return "";
         }
 
     /*    public static void Main(string[] args) {

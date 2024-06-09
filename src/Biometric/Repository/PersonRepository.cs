@@ -15,7 +15,6 @@ namespace Biometric.Repository
             _connectionString = connectionString;
         }
 
-        // Retrieves all persons from the database
         public async Task<IEnumerable<Person>> GetAllPersonsAsync()
         {
             using (IDbConnection db = new MySqlConnection(_connectionString))
@@ -25,7 +24,6 @@ namespace Biometric.Repository
             }
         }
 
-        // Retrieves a person by their NIK
         public async Task<Person> GetPersonByNIKAsync(string nik)
         {
             using (IDbConnection db = new MySqlConnection(_connectionString))
@@ -44,7 +42,6 @@ namespace Biometric.Repository
             }
         }
 
-        // Inserts a new person into the database
         public async Task<int> InsertPersonAsync(Person person)
         {
             using (IDbConnection db = new MySqlConnection(_connectionString))
@@ -55,7 +52,6 @@ namespace Biometric.Repository
             }
         }
 
-        // Updates an existing person in the database
         public async Task<int> UpdatePersonAsync(Person person)
         {
             using (IDbConnection db = new MySqlConnection(_connectionString))
@@ -68,7 +64,6 @@ namespace Biometric.Repository
             }
         }
 
-        // Deletes a person from the database
         public async Task<int> DeletePersonAsync(string nik)
         {
             using (IDbConnection db = new MySqlConnection(_connectionString))

@@ -14,9 +14,6 @@ using System.Windows.Controls;
 
 namespace Biometric
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         private BitmapImage sidikJari = null;
         private BitmapImage sidikJariHasil = null;
@@ -40,9 +37,7 @@ namespace Biometric
             {
                 try
                 {
-                    // Load the selected image file into the image control
                     sidikJari = new BitmapImage(new Uri(openFileDialog.FileName));
-                    Console.WriteLine(openFileDialog.FileName);
                     p.setAttributes(openFileDialog.FileName);
                     imageControl.Source = sidikJari;
                 }
@@ -78,7 +73,6 @@ namespace Biometric
 
         public Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
         {
-            // Convert BitmapImage to a MemoryStream
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 BitmapEncoder encoder = new BmpBitmapEncoder();
@@ -86,7 +80,6 @@ namespace Biometric
                 encoder.Save(memoryStream);
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
-                // Create a Bitmap from the MemoryStream
                 Bitmap bitmap = new Bitmap(memoryStream);
                 return bitmap;
             }
@@ -113,7 +106,6 @@ namespace Biometric
             }
             else
             {
-                Console.WriteLine("starting");
                 Env.Load("..\\..\\.env");
                 string server = Env.GetString("DB_SERVER");
                 string user = Env.GetString("DB_USER");
@@ -121,27 +113,23 @@ namespace Biometric
                 string database = Env.GetString("DB_DATABASE");
 
                 string connectionString = $"Server={server};User={user};Password={password};Database={database};";
-                Console.WriteLine("connection to db established");
 
                 List<Fingerprint> fingerprints;
                 Fingerprint res = new Fingerprint();
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     FingerprintRepository fr = new FingerprintRepository(connectionString);
-                    var fingerprintTask = fr.GetAllFingerprintAsync(); // Get the task
-                    var fingerprintsResult = await fingerprintTask; // Await the task to get the result
-                    fingerprints = fingerprintsResult.ToList(); // Convert the result to a list
+                    var fingerprintTask = fr.GetAllFingerprintAsync();
+                    var fingerprintsResult = await fingerprintTask;
+                    fingerprints = fingerprintsResult.ToList();
                 }
 
-                Console.WriteLine($"panjang fingerprints: {fingerprints.Count()}");
-                Console.WriteLine("fingerprint loaded");
                 double similarity = 0;
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
                 if (radioButton2.IsChecked == true) 
                 {
                     algorithm = "KMP";
-                    Console.WriteLine("KMP");
                     var kmpResult = await Task.Run(() => parallelKmpComparator(fingerprints));
 
                     if (kmpResult.Item1)
@@ -151,7 +139,7 @@ namespace Biometric
                     }
                     else
                     {
-                        var levResult = await Task.Run(() => minLevenshteinComparator(fingerprints));
+                        var levResult = await Task.Run(() => bfLevComparator(fingerprints));
                         res = levResult.Item2;
                         similarity = levResult.Item1;
                     }
@@ -159,19 +147,16 @@ namespace Biometric
                 else
                 {
                     algorithm = "BM";
-                    Console.WriteLine("BM");
-                    var bmResult = manualBmComparator(fingerprints);
+                    var bmResult = parallelBmComparator(fingerprints);
 
                     if (bmResult.Item1)
                     {
-                        Console.WriteLine("found");
                         res = bmResult.Item2;
                         similarity = 1;
                     }
                     else
                     {
-                        Console.WriteLine("not found");
-                        var levResult = await Task.Run(() => minLevenshteinComparator(fingerprints));
+                        var levResult = await Task.Run(() => bfLevComparator(fingerprints));
                         res = levResult.Item2;
                         similarity = levResult.Item1;
                     }
@@ -200,7 +185,6 @@ namespace Biometric
 
                 String absolutePath = Path.GetFullPath(@"..\..\test\real\" + res.berkas_citra);
                 Uri imageUri = new Uri(absolutePath);
-                Console.WriteLine(imageUri);
                 sidikJariHasil = new BitmapImage(imageUri);
                 imageFound.Source = sidikJariHasil;
                 stopwatch.Stop();
@@ -239,7 +223,6 @@ namespace Biometric
                             {
                                 lock (lockObj)
                                 {
-                                    Console.WriteLine($"lagi nyari di {absPath}");
                                     if (!found)
                                     {
                                         found = true;
@@ -253,30 +236,6 @@ namespace Biometric
                 });
             }
             catch (OperationCanceledException) { }
-
-            return (found, foundFingerprint);
-        }
-
-        private (bool, Fingerprint) manualBmComparator(List<Fingerprint> fingerprints)
-        {
-            bool found = false;
-            Fingerprint foundFingerprint = null;
-
-            foreach (Fingerprint fingerprint in fingerprints)
-            {
-                string absPath = Path.GetFullPath(Path.Combine(@"..\..\", "test", "real", fingerprint.berkas_citra));
-                if (File.Exists(absPath))
-                {
-                    {
-                        if (p.bmComparator(absPath))
-                        {
-                            found = true;
-                            foundFingerprint = fingerprint;
-                            break;
-                        }
-                    }
-                }
-            }
 
             return (found, foundFingerprint);
         }
@@ -303,7 +262,6 @@ namespace Biometric
                     if (File.Exists(absPath))
                     {
                         {
-                            Console.WriteLine(found);
                             if (p.bmComparator(absPath))
                             {
                                 lock (lockObj)
@@ -355,9 +313,37 @@ namespace Biometric
             return (maxDistance, minDistanceFingerprint);
         }
 
+        private (double, Fingerprint) bfLevComparator(List<Fingerprint> fingerprints)
+        {
+            double maxDistance = double.MinValue;
+            Fingerprint minDistanceFingerprint = null;
+            object lockObj = new object();
+
+            foreach (Fingerprint fingerprint in fingerprints)
+            {
+                string absPath = Path.GetFullPath(Path.Combine(@"..\..\", "test", "real", fingerprint.berkas_citra));
+                if (File.Exists(absPath))
+                {
+                    {
+                        double distance = p.bruteForceLevComparator(absPath);
+
+                        lock (lockObj)
+                        {
+                            if (distance > maxDistance)
+                            {
+                                maxDistance = distance;
+                                minDistanceFingerprint = fingerprint;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return (maxDistance, minDistanceFingerprint);
+        }
+
         private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            // Restart the media
             mediaElement.Position = TimeSpan.Zero;
             mediaElement.Play();
         }

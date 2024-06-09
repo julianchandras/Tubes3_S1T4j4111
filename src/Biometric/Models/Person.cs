@@ -11,7 +11,7 @@ namespace Biometric.Models
         public string? NIK { get; set; }
         public string? nama { get; set; }
         public string? tempat_lahir { get; set; }
-        public DateTime? tanggal_lahir { get; set; }  // Nullable DateTime for nullable 'tanggal_lahir' field
+        public DateTime? tanggal_lahir { get; set; }
         public string? jenis_kelamin { get; set; }
         public string? golongan_darah { get; set; }
         public string? alamat { get; set; }

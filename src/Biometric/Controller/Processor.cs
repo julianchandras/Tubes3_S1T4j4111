@@ -18,8 +18,6 @@ namespace Biometric.Controller
             inputPatterns = FingerprintReader.imgToPattern(inputFilePath);
             inputText = FingerprintReader.imgToText(inputFilePath);
             textLength = inputText.Length;
-            Console.WriteLine("Text Length: " + textLength);
-            Console.WriteLine("Input Patterns: " + inputPatterns.Count());
         }
 
         public bool bmComparator(string compImg)
@@ -55,6 +53,23 @@ namespace Biometric.Controller
             string compText = FingerprintReader.imgToText(compImg);
             int levDistance = Algorithms.Levenshtein.levenshteinDistance(inputText, compText);
             return 1 - (double)levDistance / Math.Max(textLength, compText.Length);
+        }
+
+        public double bruteForceLevComparator(string compImg)
+        {
+            double totalDistance = 0;
+            string compText = FingerprintReader.imgToText(compImg);
+            int patternCount = inputPatterns.Count();
+
+            Parallel.ForEach(inputPatterns, (pattern) =>
+            {
+                int distance = Algorithms.Levenshtein.findClosestSubstring(compText, pattern);
+                double normalizedDistance = (double)distance / pattern.Length;
+                totalDistance += normalizedDistance;
+            });
+
+            double avgDistance = totalDistance / patternCount;
+            return 1 - avgDistance;
         }
     }
 }

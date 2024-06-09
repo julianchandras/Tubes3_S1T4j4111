@@ -162,5 +162,7 @@
 		<Image Margin="524,0,130,350" Source="/assets/Tomnook-Scary.png" Stretch="Uniform"/>
 		<TextBlock x:Name="textExTime" HorizontalAlignment="Right" Margin="0,92,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
 		<TextBlock x:Name="textPercentage" HorizontalAlignment="Right" Margin="0,111,55,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontFamily="Cascadia Code" FontSize="12" Foreground="Black"/>
+
+		<MediaElement x:Name="mediaElement" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaEnded="mediaElement_MediaEnded"/>
 	</Grid>
 </Window>

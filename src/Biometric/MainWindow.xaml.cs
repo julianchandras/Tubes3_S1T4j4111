@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace Biometric
 {
@@ -25,56 +26,9 @@ namespace Biometric
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        // Use an asynchronous method to perform initialization
-        private async Task InitializeAsync()
-        {
-            MessageBox.Show(Directory.GetCurrentDirectory());
-
-            Env.Load("..\\..\\.env");
-
-            string server = Env.GetString("DB_SERVER");
-            string user = Env.GetString("DB_USER");
-            string password = Env.GetString("DB_PASS");
-            string database = Env.GetString("DB_DATABASE");
-
-            string connectionString = $"Server={server};User={user};Password={password};Database={database};";
-
-            MessageBox.Show(connectionString);
-
-            // Execute the query using Dapper
-            using (var connection = new MySqlConnection(connectionString))
-            {
-                // Step 1: Create an instance of PersonRepository
-                PersonRepository pr = new PersonRepository(connectionString);
-
-                // Step 2: Create a new Person object with the required details
-                Person test = new Person
-                {
-                    NIK = "13522080",  // Assuming this is the NIK
-                    nama = "John Doe",
-                    tempat_lahir= "Jakarta",
-                    tanggal_lahir = new DateTime(1990, 1, 1), // Example date of birth
-                    jenis_kelamin = "Laki-Laki",
-                    golongan_darah = "O",
-                    alamat = "Jl. Sudirman No. 10",
-                    agama = "Islam",
-                    status_perkawinan = "Belum Menikah",
-                    pekerjaan = "Developer",
-                    kewarganegaraan = "Indonesia",
-                };
-                MessageBox.Show(test.ToString());
-
-                // Step 3: Call InsertPersonAsync method to insert the new person
-                int rowsAffected = await pr.InsertPersonAsync(test);
-
-                MessageBox.Show(rowsAffected.ToString());
-                IEnumerable<Person> allPersons = await pr.GetAllPersonsAsync();
-
-                // Convert rowsAffected to string before showing it in MessageBox
-                MessageBox.Show(((allPersons.First()).NIK).ToString());
-            }
+            string absPath = Path.GetFullPath(Path.Combine("assets", "tomnook_happy.mp3"));
+            mediaElement.Source = new Uri(absPath);
+            mediaElement.Play();
         }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -382,6 +336,13 @@ namespace Biometric
             }
 
             return (maxDistance, minDistanceFingerprint);
+        }
+
+        private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            // Restart the media
+            mediaElement.Position = TimeSpan.Zero;
+            mediaElement.Play();
         }
     }
 }

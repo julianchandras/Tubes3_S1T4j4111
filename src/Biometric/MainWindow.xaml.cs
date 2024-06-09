@@ -195,7 +195,6 @@ namespace Biometric
                         Console.WriteLine("found");
                         res = bmResult.Item2;
                         similarity = 1;
-                        return;
                     }
                     else
                     {

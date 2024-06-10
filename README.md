@@ -64,7 +64,7 @@ Regular Expression mencocokkan suatu teks dengan pola tertentu. Regular expressi
 ## Kreator
 | NIM | Nama | Kontak |
 |-----|------| ------ |
-| 10023485 | Lidya Rahmatul Fitri | [Lidyarf24](#https://github.com/Lidyarf24) |
-| 13522033 | Bryan Cornelius Lauwrence | [BryanLauw](#https://github.com/bryanlauw) |
-| 13522062 | Salsabiila | [salsbiila](#https://github.com/salsbiila) |
-| 13522090 | Julian Chandra Sutadi| [julianchandras](#https://github.com/julianchandras) |
+| 10023485 | Lidya Rahmatul Fitri | [Lidyarf24](https://github.com/Lidyarf24) |
+| 13522033 | Bryan Cornelius Lauwrence | [BryanLauw](https://github.com/bryanlauw) |
+| 13522062 | Salsabiila | [salsbiila](https://github.com/salsbiila) |
+| 13522090 | Julian Chandra Sutadi| [julianchandras](https://github.com/julianchandras) |
